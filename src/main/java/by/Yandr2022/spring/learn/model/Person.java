@@ -1,23 +1,26 @@
 package by.Yandr2022.spring.learn.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
 public class Person {
-    @Column(name="id")
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @Column(name="age")
+    @Column(name = "age")
     private int age;
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
 
     public Person() {
     }
 
-    public Person( String name, int age) {
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -44,6 +47,14 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override
