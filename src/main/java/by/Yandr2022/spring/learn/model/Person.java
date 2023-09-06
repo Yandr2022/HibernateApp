@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Person {
     @Column(name="id")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="name")
     private String name;
@@ -16,8 +17,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String name, int age) {
-        this.id = id;
+    public Person( String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -44,5 +44,13 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
