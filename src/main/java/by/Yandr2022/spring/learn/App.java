@@ -38,18 +38,34 @@ public class App {
 //            Item item = new Item (person, "TestItem");
 //            session.save(item);
 //            person.getItems().add(item);//only for hibernate cache, not important for Schema - best practice
+//
+//            Person person = new Person("Test person", 35);
+//            Item item = new Item(person, "TestItem2");
+//
+//            //only for hibernate cache, not important for Schema - best practice
+//            person.setItems(new ArrayList<>(Collections.singletonList(item)));
+//
+//            session.save(person);
+//            session.save(item);
 
-            Person person = new Person("Test person", 35);
-            Item item = new Item(person, "TestItem2");
+//            Person person = session.get(Person.class,6);
+//            List<Item> items = person.getItems();
+//            for (Item i : items) {
+//                session.remove(i);
+//            }
+//            person.getItems().clear();//only for hibernate cache, not important for Schema - best practice
 
-            //only for hibernate cache, not important for Schema - best practice
-            person.setItems(new ArrayList<>(Collections.singletonList(item)));
+//            Person person = session.get(Person.class,5);
+//            session.remove(person);
+//            person.getItems().stream().forEach(i->i.setOwner(null));//only for hibernate cache, not important for Schema - best practice
+//
 
-            session.save(person);
-            session.save(item);
-
+            Person person = session.get(Person.class, 4);
+            Item item = session.get(Item.class, 12);
+            item.getOwner().getItems().remove(item);//only for hibernate cache
+            item.setOwner(person);//only for hibernate cache
+            person.getItems().add(item);
             session.getTransaction().commit();
-
         } finally {
             session.close();
         }
