@@ -22,6 +22,9 @@ public class Item {
         this.name = name;
         this.owner=person;
     }
+    public Item( String name) {
+        this.name = name;
+    }
 
     public void setId(int id) {
         this.id = id;

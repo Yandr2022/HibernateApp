@@ -67,7 +67,7 @@ public class App {
             person.getItems().add(item);
             session.getTransaction().commit();
         } finally {
-            session.close();
+            sessionFactory.close();
         }
 
     }

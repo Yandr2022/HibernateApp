@@ -1,6 +1,11 @@
 package by.Yandr2022.spring.learn.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -15,6 +20,7 @@ public class Person {
     @Column(name = "age")
     private int age;
     @OneToMany(mappedBy = "owner")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Item> items;
 
     public Person() {
@@ -55,6 +61,16 @@ public class Person {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public void addItem(Item... items) {
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        for (Item item : items) {
+            this.items.add(item);
+            item.setOwner(this);
+        }
     }
 
     @Override
