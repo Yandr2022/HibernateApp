@@ -6,8 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class CascadingDemo {
     public static void main(String[] args) {
@@ -21,6 +19,7 @@ public class CascadingDemo {
                     , new Item("Test Item Cascade2"), new Item("Test Item Cascade3"));
             session.save(person);
             session.getTransaction().commit();
+
         } finally {
             sessionFactory.close();
         }

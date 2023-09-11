@@ -3,14 +3,14 @@ package by.Yandr2022.spring.learn.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="item")
+@Table(name = "item")
 public class Item {
-    @Column(name="id")
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-@ManyToOne
-@JoinColumn(name = "person_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
     @Column(name = "name")
     private String name;
@@ -20,9 +20,10 @@ public class Item {
 
     public Item(Person person, String name) {
         this.name = name;
-        this.owner=person;
+        this.owner = person;
     }
-    public Item( String name) {
+
+    public Item(String name) {
         this.name = name;
     }
 
